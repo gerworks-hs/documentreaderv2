@@ -5,12 +5,15 @@ FILE *path;
 
 void readDataStream(FILE *stream) {
 	char nextChar;
-	do {
+	while ((nextChar = fgetc(stream)) != EOF) {
 		fprintf(stdout, "%c", nextChar);
-	} while ((nextChar = fgetc(stream)) != EOF);
+	}
 }
 
 int main(int argc, char **argv) {
+	if (argc != 2) {
+		fprintf(stderr, "Usage: %s <file path>\n", argv[0]);
+	}
 	fprintf(stdout, "File to read -> %s\n", argv[1]);
 	if ((path = fopen(argv[1], "r")) == NULL) {
 		fprintf(stderr, "The file path is not valid or you do not have right to read it\n");
@@ -20,6 +23,7 @@ int main(int argc, char **argv) {
 		fprintf(stdout, "--BEGIN OF FILE--\n");
 		readDataStream(path);
 		fprintf(stdout, "--END OF FILE--\n");
+		fclose(argv[1]);
 		return 0;
 	}
 }
