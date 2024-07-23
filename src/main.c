@@ -23,7 +23,7 @@ int main(int argc, char **argv) {
 		fprintf(stdout, "--BEGIN OF FILE--\n");
 		readDataStream(path);
 		fprintf(stdout, "--END OF FILE--\n");
-		fclose(argv[1]);
+		fclose(path);
 		return 0;
 	}
 }
